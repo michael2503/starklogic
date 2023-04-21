@@ -24,7 +24,7 @@
                 <div class="text-right">
                     <div class="d-flex justify-content-between">
                         <div class="allLink text-left">
-                            <p><b>All Links</b>: {{ count($links) }}</p>
+                            <p><b>All Links</b>: {{ $links->total() }}</p>
                             <p class="mb-0"><b>Total Clicks</b>: {{ $totalClick }}</p>
                         </div>
                         <div class="allLink">

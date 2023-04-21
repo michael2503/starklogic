@@ -15,7 +15,6 @@ class LinkController extends Controller
     {
         $baseUrl =  url('');
         $links = TheLink::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(5);
-
         return view('links.list', [
             'links' => $links,
             'baseUrl' => $baseUrl,
