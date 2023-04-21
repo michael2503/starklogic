@@ -17,7 +17,7 @@
                     <form method="post" action="{{ route('register') }}" class="form-horizontal">
                         @csrf
                         <div class="text-center">
-                            <img src="{{ asset('assets/images/starlogic.jpg') }}" class="mb-3" width="170" alt="">
+                            <img src="{{ asset('assets/images/logoBWy.png') }}" class="mb-3" width="170" alt="">
                             <div class="heading">{{ __('Welcome to Stark Logic, Please Sign Up') }}</div>
                         </div>
                         <div class="row">

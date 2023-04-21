@@ -1,76 +1,81 @@
 <x-app-layout>
     @section('title', 'All Links')
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Links') }}
-        </h2>
-    </x-slot>
+
+    <x-breadcrum data="Links"/>
 
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+    <div class="container mb-5">
 
-                <div class="text-right mb-5">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addLink">Create Link</button>
+        <x-success-message />
+
+        @if ($errors->first('title'))
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-6">
+                <div class="mt-4 alert alert-danger">
+                    <b>{{ $errors->first('title') }}</b>
                 </div>
-
-                <x-success-message />
-
-                @if ($errors->first('title'))
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="mt-4 alert alert-danger">
-                            <b>{{ $errors->first('title') }}</b>
-                        </div>
-                    </div>
-                </div>
-                @endif
-
-
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Link</th>
-                                <th>No. of Clicks</th>
-                                <th>Created On</th>
-                                <th>Options</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @forelse ($links as $link)
-                            <tr>
-                                <td>#{{ $link->id }}</td>
-                                <td>{{ $baseUrl.'/'.$link->link_name }}</td>
-                                <td>{{ $link->clicks }}</td>
-                                <td>{{ date('M d, Y', strtotime($link->created_at)) }}</td>
-                                <td style="width: 200px">
-                                    <a href="{{ route('singleLink', $link->id) }}" title="Edit Link" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
-                                    <a href="{{ route('viewLink', $link->link_name) }}" title="View Link" class="btn btn-success btn-sm" target="_blank"><i class="fa fa-eye"></i></a>
-                                    <button title="Share Link" onclick='shareLink("{{ $link->link_name }}", "{{ $link->title }}")' class="btn btn-info btn-sm" data-toggle="modal" data-target="#shareLink"><i class="fa fa-share-alt"></i></button>
-                                    <button title="Share Link" onclick='copyLink("{{ $link->link_name }}", "{{ $link->title }}")' class="btn btn-info btn-sm"><i class="fa fa-copy"></i></button>
-                                    <button onclick="deleteLink({{ $link->id }})" title="Delete Link" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="text-center">No Links Available</td>
-                                </tr>
-                            @endforelse
-
-                        </tbody>
-                    </table>
-                </div>
-
-
-                <div class="d-flex justify-content-center">
-                    {!! $links->links() !!}
-                </div>
-
             </div>
+        </div>
+        @endif
+
+        <div class="card mb-5">
+            <div class="card-header">
+                <div class="text-right">
+                    <div class="d-flex justify-content-between">
+                        <div class="allLink text-left">
+                            <p><b>All Links</b>: {{ count($links) }}</p>
+                            <p class="mb-0"><b>Total Clicks</b>: {{ $totalClick }}</p>
+                        </div>
+                        <div class="allLink">
+                            <button class="btn btn-success" data-toggle="modal" data-target="#addLink">Create Link</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Link</th>
+                        <th>No. of Clicks</th>
+                        <th>Created On</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @forelse ($links as $link)
+                    <tr>
+                        <td>#{{ $link->id }}</td>
+                        <td>{{ $baseUrl.'/'.$link->link_name }}</td>
+                        <td>{{ $link->clicks }}</td>
+                        <td>{{ date('M d, Y', strtotime($link->created_at)) }}</td>
+                        <td style="width: 200px">
+                            <a href="{{ route('singleLink', $link->id) }}" title="Edit Link" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+                            <a href="{{ route('viewLink', $link->link_name) }}" title="View Link" class="btn btn-success btn-sm" target="_blank"><i class="fa fa-eye"></i></a>
+                            <button title="Share Link" onclick='shareLink("{{ $link->link_name }}", "{{ $link->title }}")' class="btn btn-info btn-sm" data-toggle="modal" data-target="#shareLink"><i class="fa fa-share-alt"></i></button>
+                            <button title="Share Link" onclick='copyLink("{{ $link->link_name }}", "{{ $link->title }}")' class="btn btn-info btn-sm"><i class="fa fa-copy"></i></button>
+                            <button onclick="deleteLink({{ $link->id }})" title="Delete Link" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">No Links Available</td>
+                        </tr>
+                    @endforelse
+
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="d-flex justify-content-center">
+            {!! $links->links() !!}
         </div>
     </div>
 

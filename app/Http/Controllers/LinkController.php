@@ -19,6 +19,7 @@ class LinkController extends Controller
         return view('links.list', [
             'links' => $links,
             'baseUrl' => $baseUrl,
+            'totalClick' => TheLink::where('user_id', Auth::user()->id)->sum('clicks')
         ]);
     }
 
