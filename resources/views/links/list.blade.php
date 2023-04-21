@@ -7,6 +7,7 @@
     <div class="container mb-5">
 
         <x-success-message />
+        <x-error-message />
 
         @if ($errors->first('title'))
         <div class="row d-flex justify-content-center">

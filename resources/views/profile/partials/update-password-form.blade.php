@@ -20,9 +20,9 @@
         </div>
 
         <div class="form-group">
-            <label for="password_confirmation">New Password</label>
-            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" autocomplete="new-password" >
-            <div class="formErr">{{$errors->updatePassword->first('password_confirmation')}}</div>
+            <label for="password">New Password</label>
+            <input type="password" id="password" name="password" class="form-control" autocomplete="new-password" >
+            <div class="formErr">{{$errors->updatePassword->first('password')}}</div>
         </div>
 
         <div class="form-group">

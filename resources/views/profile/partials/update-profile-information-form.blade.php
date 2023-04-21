@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" class="form-control" value="{{ old('name', $user->email) }}" required autofocus autocomplete="username" >
+            <input type="email" id="email" name="email" class="form-control" value="{{ old('email', $user->email) }}" required autofocus autocomplete="username" >
             <div class="formErr">{{$errors->first('email')}}</div>
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
@@ -51,7 +51,7 @@
 
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" id="phone" name="phone" class="form-control" value="{{ old('name', $user->phone) }}" required autofocus autocomplete="username" >
+            <input type="text" id="phone" name="phone" class="form-control" value="{{ old('phone', $user->phone) }}" required autofocus autocomplete="username" >
             <div class="formErr">{{$errors->first('phone')}}</div>
         </div>
 

@@ -66,23 +66,16 @@ class LinkController extends Controller
             return view('linkview', [
                 'link' => $get
             ]);
+        } else if(Auth::user()) {
+            return redirect()->route('dashboard');
+        } else if($linkName == 'login'){
+            return view('auth.login');
+        } else if($linkName == 'register'){
+            return  view('auth.register');
         } else {
-            switch (strtolower($linkName)) {
-                case 'login':
-                    return view('auth.login');
-                    break;
-
-                case 'register':
-                    return  view('auth.register');
-                    break;
-
-                default:
-                    abort(404);
-                    break;
-            }
+            abort(404);
         }
     }
-
 
     public function deleteLink(Request $request)
     {

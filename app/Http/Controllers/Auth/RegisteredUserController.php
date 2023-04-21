@@ -20,6 +20,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
+        if(Auth::user()){
+            return view('dashboard');
+        }
         return view('auth.register');
     }
 
